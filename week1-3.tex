@@ -1,0 +1,212 @@
+\documentclass{article}
+
+\title{Modern Physics Note Week 1-3}
+\author{Michael Nipper}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{braket}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{graphicx}
+\usepackage[margin=1.0in]{geometry}
+\usepackage{bbold}
+
+\begin{document}
+
+\maketitle
+
+\section{Galilean Relativity}
+\subsection{Reference Frames}
+
+A reference frame is a set of coordinates. Relativity is the study of translating events from one reference frame to another. In particular, we will mostly be studying the translations between \emph{inertial frames}. An inertial frame is defined as a reference
+frame that is moving at a constant velocity, i.e. a frame in which the law of inertia is true. The Theory of Special Relativity is based on the following simple postulate, called the \emph{Priciple of Relativity}:
+
+\begin{center} \textbf{The laws of physics are the same in all inertial reference frames.}\end{center}
+
+It is standard to label the two reference frames we are analyzing as $S$ and $S'$, sometimes refered to as the \emph{Home Frame} and \emph{Other Frame} respectively. We are free to chose which labels we assign to each frame, but for simplicity's sake we shall stick with \textbf{standard orientation} in which $S$ will always be stationary and $S'$ will always be moving to the right in the $+x$ direction. We will also always choose that time is universial, $t = t'$ and the frames origins coincide, $x(0) = x'(0) = 0$
+
+\subsection{Galilean Tranformation Equations}
+
+Using the principles stated above and some simple vector addition we can construct the Galilean posistion transformation equation. The velocity and acceleration transformation equations can the be derived by taking the first and second time derivatives:
+\begin{align}
+  \vec{r'}(t')&=\vec{r}(t')-\vec{\beta}t\\
+  \vec{v'}(t')&=\vec{v}(t')-\vec{\beta}\\
+  \vec{a'}(t')&=\vec{a}(t')
+\end{align}
+Where $\vec{r}$ is the position of the event in $S$, $\vec{v}$ is the velocity of that event in $S$ and $\vec{a}$ is its acceleration, $\vec{r'}$, $\vec{v'}$, and $\vec{a'}$ are the tranformed vectors in $S'$ and $\beta$ is the relative velocity between $S$ and $S'$. Note that these equations only apply to reference frames and objects that are moving significantly slower than the speed of light, $\beta<<c$ and $\vec{v}<<c$.
+
+\subsection{Classical Breakdown}
+Recall Maxwell's equations which govern the behavor of electromagnetic fields (free space):
+\begin{align*}
+  \nabla\cdot\vec{E}&=0\\
+  \nabla\cdot\vec{B}&=0\\
+  \nabla\times\vec{E}&=-\frac{\partial\vec{B}}{\partial t}\\
+  \nabla\times\vec{B}&=\mu_{0}\epsilon_{0}\frac{\partial\vec{E}}{\partial t}
+\end{align*}
+In vacuum, each Cartesian component of E and B satisfies the three dimensonal wave equation:
+\begin{align*}
+  \nabla^{2}\vec{E}&=\mu_{0}\epsilon_{0}\frac{\partial^{2}\vec{E}}{\partial t^{2}}\\
+  \nabla^{2}\vec{B}&=\mu_{0}\epsilon_{0}\frac{\partial^{2}\vec{B}}{\partial t^{2}}
+\end{align*}
+Maxwell's equations imply that empty space supports the propagation of electromagnetic waves, traveling at the speed of light
+\begin{align*}
+  v = \frac{1}{\sqrt{\mu_{0}\epsilon_{0}}} = 3\times10^{8}m/s = c
+\end{align*}
+Thus we arrive at a contradiction when we accept Maxwell's equations along with the Galilean Transformations and the Priciple of Relativity. Imagine we are on a train traveling at $50\%$ the speed of light in the $+x$ direction. We then turn on a flashlight directed in the $+x$ direction. Maxwell's equations state that we would see the light beam moving away from us at the speed of light. Our friend Bob is at rest with the ground and watches the train pass by. When we turn on our flashlight, what would Bob see? From Galilao:
+\begin{align*}
+  v &= v' + \beta\\
+  v &= c, \beta = \frac{c}{2}\\
+  v &= c + \frac{c}{2} = \frac{3c}{2}
+\end{align*}
+The Galilean tranformations imply that Bob would see the light beam moving at $150\%$ the speed of light! But the Principle of relativity says that the laws of physics are the same in all inertial refernce frames, and clearly this is violating the laws of Electromagnitism. So one of these three assumptions must be false. Einstein says, and experiments show that it is the Galilean Transformations that are incorrect.
+
+\section{Special Relativity}
+\subsection{Spacetime Diagrams}
+From now on we shall be dealing with SR units. In SR units, the speed of light is defined to be 1. Time is typically measured in seconds. Importantly, \emph{all distances are measured in the time it would take light to travel that distance}. Therefore, when we plot the time and space coordinates of an event on a spacetime graph, \emph{both the $x$ and $t$ axes will be measured in the same units}, usually seconds. On a spacetime diagram, the $t$ axis is always the vertical axis. Therefore the slope of a line depecting a moving object will be the \emph{inverse} of its velocity. Since both the $x$ and $t$ axes are measured in light-seconds, a beam of light will always have a speed and slope of $\pm1$
+
+\begin{center}
+\begin{tikzpicture}
+  \begin{axis}[xmin=0, xmax=5, ymin=0, ymax=5, axis x line=middle, axis y line=middle,
+    xlabel = \(x(s)\),
+    ylabel = \(t(s)\)
+    ]
+    \addplot[domain=0:5, dashed]{x} node[pos=0.9](dashed){};
+    \addplot[domain=0:5, red]{5/3*x} node[pos=0.6](tprime){};
+    \addplot[blue] coordinates {(2, 0) (2, 5)} node[pos=0.95](stationary){};
+    \node[above] at (dashed) {$\mathbf{c}$};
+    \node[below, red] at (tprime) {$\mathbf{t'_{1}}$};
+    \node[left, blue] at (stationary) {$\mathbf{t'_{2}}$};
+  \end{axis}
+\end{tikzpicture}
+\end{center}
+
+This spacetime diagram represents an inertial frame. Think of the $t$ axis as a clock at rest sitting at the origin of the frame. Each $t'$ line is a clock that is sitting at rest in another frame which is moving away at a speed of $\beta = m^{-1}$. The line in the STD is their $t$ axis as viewed from this reference frame. The dashed line represents a beam of light starting at $x(0)=0$ and traveling in the $+x$ direction. The red $t'_{1}$ represents the time axis of a clock that is moving away from us in the $+x$ direction. Since its slope is $m=\frac{5}{3}$ it is moving with a speed of $\beta=\frac{3}{5}c$ relative to us. The $t'_{2}$ is the time axis of a clock that is stationary relative to us but is 2 seconds away. The lines representing other clocks on a STD are called their \textbf{worldlines}.
+
+\subsection{Three Types of Time}
+
+There are 3 types of time measurements in SR, coordinate time, proper time, and the spacetime interval.
+
+\subsubsection{Coordinate Time}
+
+Imagine we are on a train moving with a constant velocity in the $+x$ direction relative to the ground. Let the frame of the train be $S'$ and the ground frame be $S$. In the middle of the train we fire two beams of light, one going towards the front of the train and one going towards the back. The STD for $S'$ would then be:
+
+\begin{center}
+  \begin{tikzpicture}
+    \begin{axis}[
+      xmin=-10, xmax=10,
+      ymin=-1, ymax=10,
+      axis x line=middle, axis y line=middle,
+      xlabel= \(x'\),
+      ylabel= \(t'\)
+      ]
+      \addplot[] coordinates {(-5,0) (-5, 10)} node[pos=0.05, above left]{B};
+      \addplot[] coordinates {(5,0) (5, 10)} node[pos=0.05, above right]{F};
+      \addplot[domain=0:5, dashed]{x} node[pos=1, left]{$E_{F}$};
+      \addplot[domain=0:-5, dashed]{-x} node[pos=1, right]{$E_{B}$};
+    \end{axis}
+  \end{tikzpicture}
+\end{center}
+
+B and F are the back and front of the train respectively, and $E_{B}$ $E_{F}$ are the events corrisponding to the light beams hitting the front and back of the train. The dashed lines are the beams of light traveling from the origin and arriving at their respective events at $t' = 5$. The time that is being measured in this case is called a \textbf{coordinate time}. \textbf{A coordinate time is a time measured in an inertial frame.} Coordinate times are in general \emph{frame dependent}, as we can see by considering the $S$ frame. Say the train is moving at a speed of $\beta = +\frac{1}{5}$, then the STD for $S$ would look like:
+
+\begin{center}
+  \begin{tikzpicture}
+    \begin{axis}[
+      xmin=-10, xmax=10,
+      ymin=-1, ymax=10,
+      axis x line=middle, axis y line=middle,
+      xlabel= \(x\),
+      ylabel= \(t\)
+      ]
+      \addplot[domain=-5:10] {5*(x+5)} node[pos=0.02, below left]{B};
+      \addplot[domain=5:10] {5*(x-5)} node[pos=0.04, above right]{F};
+      \addplot[domain=0:6.2, dashed]{x} node[pos=1, left]{$E_{F}$};
+      \addplot[domain=0:-4.2, dashed]{-x} node[pos=1, left]{$E_{B}$};
+    \end{axis}
+  \end{tikzpicture}
+\end{center}
+
+Since light must still travel at a speed of 1 in all reference frames, \emph{the coordinate time of an event in one frame may be different than the coordinate time measured in a different frame}. Clearly both events happen at different points along the $t$ axis.
+
+\subsubsection{Space Time Interval}
+
+In the previous example, the time we were analyzing was the coordinate time, a time measured in an inertial frame. Notably, the time we measured was not measured with a clock that was at every event. The \textbf{proper time is the time between two events that is measured by a clock that was present at both events}. \emph{Note: the clock does not have to be an inertial clock}, ie. it doesn't not have to be in an inertial frame. A time measured by an accelating clock is still a proper time, as long as it was present at both events. In the previous example, neither observer were at the events they were observing, so they did not measure a proper time. A better name for proper time might be a pathlength time, as a clock measuring a proper time would trace out a path between two events on an STD (the term proper time is short for propritary time, and is an archaic term).
+
+There is a third form of time that is measured when an inertial clock is present at both events. The \textbf{space time interval is the time between two measured by an inertial clock that is present at both events. It is unique}. On a STD, the STI is the time measured by a clock who's worldline is a straight line connect two events.
+
+\begin{center}
+  \textbf{insert light clock diagram here}
+\end{center}
+
+The metric equation allows us to calculate the STI from a coordinate time and the distance measured in the frame of the coordinate time:
+\begin{align}
+  \Delta s^{2} = \Delta t^{2} - \Delta d^{2}
+\end{align}
+Since the STI is frame independant, it can be used to relate different coordinate times and distances:
+\begin{align*}
+  \Delta {t'}^{2} - \Delta {d'}^{2} = \Delta t^{2} - \Delta d^{2}
+\end{align*}
+
+\subsubsection{Proper Time}
+
+Now that we have derived the STI we can use it to derive a general formula for the proper time. Examine the STD with a non inertial clock traveling from Event A to Event B:
+
+\begin{center}
+  \includegraphics[scale=0.25]{prop_time_plot.png}
+  *temprory drawing, still working out tikzpicture
+\end{center}
+
+Notice that since this clock is not inertial, it has a curved worldline. As $d\tau \rightarrow 0$ the line segments approach being completely flat, thus we can use our metric equation:
+
+\begin{align*}
+  \Delta \tau = \int &ds = \int \sqrt{dt^{2} - dx^{2}}\\
+  \Delta \tau &= \int \sqrt{1 - \frac{dx^{2}}{dt^{2}}}dt\\
+\end{align*}
+\begin{align}
+  \Delta \tau = \int \sqrt{1 - {v(t)}^{2}}dt
+\end{align}
+
+This can be a very difficult integral to solve if $v(t)$ is not constant. But notice, since the velocity is squared, as long as the magnitude does not vary with time then ${v(t)}^{2}$ is constant, letting us pull out the square root:
+
+\begin{align*}
+  \Delta \tau = \sqrt{1 - {v}^{2}} \int dt
+\end{align*}
+\begin{align}
+  \Delta \tau = \sqrt{1 - {v}^{2}} \Delta t
+\end{align}
+
+This coefficient appears often enough in SR that we assign its inverse the symbol $\gamma$:
+
+\begin{align}
+  \gamma = \frac{1}{\sqrt{1 - v^{2}}}\\
+\end{align}
+
+And thus we have an equation that relates a coordinate time to a proper time, assuming the velocity of the clock measuring the proper time has a constant magnitude:
+
+\begin{align}
+  \Delta t = \gamma \Delta \tau
+\end{align}
+
+\subsection{Binomial Approximation}
+When the velocities we are considering are very small compared to the speed of light it might be difficult to compute $\gamma$. We can get around this by using the binomial approximation:
+\begin{align*}
+  |x| << 1 \rightarrow {(1+x)}^{n} \approx 1 + nx
+\end{align*}
+Applying to the deffinition of $\gamma$:
+\begin{align}
+  \gamma = \frac{1}{\sqrt{1 - v^{2}}} \approx 1 + \frac{v^{2}}{2}
+\end{align}
+This is most usefull when we can cancel out the 1 on the right hand side and only have to compute $\frac{v^{2}}{2}$
+
+\subsection{Lorentz Transforms}
+Now that we have derived the $\gamma$ factor, we can state the SR consistant version of the Galilean transformation equations from earlier. These are known as the Lorentz Transformation Equations:
+\begin{align}
+  t' = \gamma (t - \beta x)\\
+  x' = \gamma (x - \beta t)
+\end{align}
+These can be used to translate the spacetime coordinates between inertial frames. If you square both equations and subtract the second from the first you can derive the STI and see that it is the same for all inertial frames. The inverse equations can be found by changing the subtraction to addition.
+
+
+\section{Relitivistic Dynamics}
+
+
+\end{document}
