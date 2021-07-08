@@ -206,16 +206,54 @@ Now that we have derived the $\gamma$ factor, we can state the SR consistant ver
 These can be used to translate the spacetime coordinates between inertial frames. If you square both equations and subtract the second from the first you can derive the STI and see that it is the same for all inertial frames. The inverse equations can be found by changing the subtraction to addition.
 
 \subsection{Lorentz Contraction}
+From Lorentz we see that lengths can vary depending on reference frame. If we let $\Delta x = L$ where $L$ is the length of an object we have:
+\begin{align}
+  L_{0} = \gamma L
+\end{align}
+Where $L_{0}$ is the rest length, the length of the object in the reference frame in which it is at rest.
 
+\subsection{Velocity Transformation}
+Now that we have transformation equations for $x$ and $t$ we can combine them to find
+an equation relating $v$ and $v'$. Taking $\frac{x'}{t'}$ and simplifying:
+\begin{align}
+  v' = &\frac{v - \beta}{1 - v \beta}\\
+  &\text{or}\\
+  v = &\frac{\beta + v'}{1 + v' \beta}
+\end{align}
 \section{Relitivistic Dynamics}
 
 \subsection{The Four-Vector}
 We need a definition of momentum that is consistant with SR. Enter the Four-Vector representation of momentum, typically denoted as $p^{\mu}$.
 \begin{align}
-  &p^{\mu} = \begin{Bmatrix} \gamma m \\ \gamma m \vec{v} \end{Bmatrix}
-  = \begin{Bmatrix} E \\ \vec{p} \end{Bmatrix}\\
-  &m = \sqrt{E^{2} - p^{2}}\\
-  &v = \frac{p}{E}
+  &p^{\mu} = \begin{bmatrix} \gamma m \\ \gamma m \vec{v} \end{bmatrix}
+  = \begin{bmatrix} E \\ \vec{p} \end{bmatrix}\\
+\end{align}
+For an object of mass m. For light with no mass
+\begin{align}
+  p^{\mu}_{\gamma} = \begin{bmatrix} E \\ E \end{bmatrix}
+\end{align}
+These vectors really have four components, one momentum component for each direction
+and one energy component. But for a one-dimensonal problem we can drop the botton two
+components and treat it as a two-dimensonal vector.
+
+4-Momentum is consereved just like newtonian momentum. Once the final momentum of an
+object is determined after a collision, we can extract information about the object
+from its 4-momentum. First, to get mass:
+\begin{align*}
+  E^{2} - |p|^{2} &= \gamma^{2} m^{2} - \gamma^{2} m^{2} |v|^{2}\\ \\
+  E^{2} - |p|&^{2} = \gamma^{2}m^{2} (1 - |v|^{2})\\
+  \\
+  \textrm{recall the deffinition of $\gamma$ }\\
+  \gamma^{2} = &\frac{1}{1-|v|^{2}}\\ \\
+  E^{2} - &|p|^{2} = m^{2}
+\end{align*}
+Therefore:
+\begin{align}
+  m = \sqrt{E^{2} - p^{2}}
+\end{align}
+Notice that we can divide the momentum by energy to get our velocity:
+\begin{align}
+  &v_{i} = \frac{p_{i}}{E}
 \end{align}
 
 \end{document}
