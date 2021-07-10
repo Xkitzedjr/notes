@@ -8,6 +8,7 @@
 \usepackage{pgfplots}
 \usepackage{graphicx}
 \usepackage[margin=1.0in]{geometry}
+\usepackage[parfill]{parskip}
 \usepackage{bbold}
 
 \begin{document}
@@ -161,6 +162,7 @@ Notice that since this clock is not inertial, it has a curved worldline. As $d\t
   \Delta \tau = \int &ds = \int \sqrt{dt^{2} - dx^{2}}\\
   \Delta \tau &= \int \sqrt{1 - \frac{dx^{2}}{dt^{2}}}dt\\
 \end{align*}
+So proper time can be calculated using this expression:
 \begin{align}
   \Delta \tau = \int \sqrt{1 - {v(t)}^{2}}dt
 \end{align}
@@ -174,7 +176,7 @@ This can be a very difficult integral to solve if $v(t)$ is not constant. But no
   \Delta \tau = \sqrt{1 - {v}^{2}} \Delta t
 \end{align}
 
-This coefficient appears often enough in SR that we assign its inverse the symbol $\gamma$:
+This the recprical of the coefficient appears often enough in SR that we assign it the symbol $\gamma$:
 
 \begin{align}
   \gamma = \frac{1}{\sqrt{1 - v^{2}}}\\
@@ -205,12 +207,88 @@ Now that we have derived the $\gamma$ factor, we can state the SR consistant ver
 \end{align}
 These can be used to translate the spacetime coordinates between inertial frames. If you square both equations and subtract the second from the first you can derive the STI and see that it is the same for all inertial frames. The inverse equations can be found by changing the subtraction to addition.
 
+\subsection{Two Observer Diagrams}
+Now that we have the Lorentz transformation equations, we can find what the axis of an observer $S'$ would look like in the frame of $S$. Lets say that in the frame of $S$, $S'$ is moving with a speed of $\beta = + \frac{3}{5}$. Lets plug this into the transformation equations and find the $S'$ coordinates as functions of the $S$ coordinates:
+\begin{align*}
+  t = \frac{3}{5}t' + \frac{3}{4}x'\\
+  x = \frac{3}{5}x' + \frac{3}{4}t'
+\end{align*}
+The $t'$ axis is the line where $x'=0$. We can plug this into our transform equations and find the $t'$ axis as a function $x(t)$. Likewise, we can do the same for the $x'$ axis. We get:
+\begin{align*}
+  t': x(t) = \frac{5}{4}t\\
+  x': x(t) = \frac{4}{5}t
+\end{align*}
+We see the $t'$ axis is the line passing through the origin with a slope of $\frac{1}{\beta}$, as seen previously. We also see that the $x'$ is the line passing through the origin with a slope of $\beta$; it is the $t'$ axis reflected by the line $x=t$. When the axis of $S'$ are mapped onto the refrence frame of $S$ it is called a two observer diagram.
+\begin{center}
+\begin{tikzpicture}
+  \begin{axis}[xmin=0, xmax=5, ymin=0, ymax=5, axis x line=middle, axis y line=middle,
+    xlabel = \(x(s)\),
+    ylabel = \(t(s)\)
+    ]
+    \addplot[domain=0:5, dashed]{x} node[pos=0.9](dashed){};
+    \addplot[domain=0:5]{5/3*x} node[pos=0.6](tprime){};
+    \addplot[domain=0:5]{3/5*x} node[pos=0.95](xprime){};
+    \node[right] at (dashed) {$\mathbf{\quad c}$};
+    \node[below] at (tprime) {$\mathbf{\quad t'}$};
+    \node[below] at (xprime) {$\mathbf{x'}$};
+  \end{axis}
+\end{tikzpicture}
+\end{center}
+Any event that occures along the $x$ axis occures simultaniously at $t=0$ in the $S$ frame, and any event that occures on the $t$
+axis happens at the same position at $x=0$. Likewise, any event that occures on the $x'$ axis occures simultaniously in the $S'$ frame,
+and any event that occures along the $t'$ axis happens at the same place. Take the world line of a beam of light traveling from the
+origin in the $+x$ direction, the dashed line in the diagram above. Lets say an event occures at the origin, and a second event
+happens with some spacetime components $x,t > 0$. If the second event occures at a point to the left of the light's world line, then
+we can find a speed that some obsever could tavel at such that both events would fall on their $t'$ axis. Meaning that both
+events would occure at the same postion in their frame. On the other hand, if the second event occures at a point to the right of the
+light's world line, then we can find a speed that some observer could tavel at such that both events would fall on their $x'$ axis,
+and both events would occure at the same time in their frame. From the metric equation, this corrisponds to the sign of $\Delta s^{2}$:
+\begin{align*}
+  \Delta s^{2} &> 0 \text{\qquad time-like (same position)}\\
+  \Delta s^{2} &= 0 \text{\qquad light-like}\\
+  \Delta s^{2} &< 0 \text{\qquad space-like (same time)}
+\end{align*}
+If $\Delta s^{2}< 0$ then the events are not caussually related; one event cannot be the cause of the other. If they were, then some
+information would have to travel between the two faster than the speed of light. But then we could find a speed less than the speed of
+light that some observer could travel at and witness the events happening in reverse order, seeing the resault before the cause.
+
+If we want to find the spacetime coordinates of an event on a STD, then we trace a line parallel to the $x$ axis from the event to
+the $t$ axis and where it meets on the $t$ axis is the value of $t$ for the event. Do the same for a line parallel to the $t$ axis to
+get the value for $x$. If we ant to find the STC for the $S'$ frame on a two observer diagram, then we do the exact same process with
+the $t'$ and $x'$ axises. The only difference is now the two parallel lines will not meet at a right angle, but the process is the
+same. To find the tick marks on primed axises, notice that when $t'=0$, $x'=\gamma x$. So every $1$ unit on the $x'$ axis is $\gamma$
+units on the $x$ axis. The same is true for the $t$ and $t'$ axis.
+
+\begin{center}
+\begin{tikzpicture}
+  \begin{axis}[xmin=0, xmax=5, ymin=0, ymax=5, axis x line=middle, axis y line=middle,
+    xlabel = \(x(s)\),
+    ylabel = \(t(s)\)
+    ]
+    \addplot[domain=1.9:5, dashed, red]{5/3*x -2} node[pos=0.6](eventt){};
+    \addplot[domain=1.9:5, dashed, red]{3/5*x +2} node[pos=0.9](eventx){};
+    \addplot[domain=0:5]{5/3*x} node[pos=0.6](tprime){};
+    \addplot[domain=0:5]{3/5*x} node[pos=0.95](xprime){};
+    \addplot[domain=0:5, dashed, blue]{4.25};
+    \addplot[domain=0:5, dashed, blue] coordinates {(3.75, 0) (3.75, 5)};
+    \node[below right] at (eventt) {$\mathbf{E}$};
+    \node[] at (eventt) {$\mathbf{x}$};
+    \node[below] at (tprime) {$\mathbf{\quad t'}$};
+    \node[below] at (xprime) {$\mathbf{x'}$};
+  \end{axis}
+\end{tikzpicture}
+\end{center}
+Here the blue lines give us the $S$ space time coordinates, and the red lines give us the $S'$ space time coordinates.
+
 \subsection{Lorentz Contraction}
-From Lorentz we see that lengths can vary depending on reference frame. If we let $\Delta x = L$ where $L$ is the length of an object we have:
+From Lorentz we see that lengths can vary depending on reference frame. Since the endpoints of the object are at rest in rest frame,
+the measurement of length is independent of $\Delta t$. If we let $\Delta x = L_{0}$, where $L_{0}$ is the length of an object in its
+rest frame, we have:
 \begin{align}
   L_{0} = \gamma L
 \end{align}
-Where $L_{0}$ is the rest length, the length of the object in the reference frame in which it is at rest.
+The rest length $L_{0}$ is also often called the proper length. Since $\gamma > 1$ always, objects will always be forshortened in the
+direction of motion compared to their proper length.
 
 \subsection{Velocity Transformation}
 Now that we have transformation equations for $x$ and $t$ we can combine them to find
@@ -242,8 +320,9 @@ from its 4-momentum. First, to get mass:
 \begin{align*}
   E^{2} - |p|^{2} &= \gamma^{2} m^{2} - \gamma^{2} m^{2} |v|^{2}\\ \\
   E^{2} - |p|&^{2} = \gamma^{2}m^{2} (1 - |v|^{2})\\
-  \\
-  \textrm{recall the deffinition of $\gamma$ }\\
+\end{align*}
+Recall the deffinition of $\gamma$:
+\begin{align*}
   \gamma^{2} = &\frac{1}{1-|v|^{2}}\\ \\
   E^{2} - &|p|^{2} = m^{2}
 \end{align*}
@@ -251,6 +330,7 @@ Therefore:
 \begin{align}
   m = \sqrt{E^{2} - p^{2}}
 \end{align}
+As the velocity of the object increaes its momentum increases but its energy does not. So as velocity increases, the radicand decreases
 Notice that we can divide the momentum by energy to get our velocity:
 \begin{align}
   &v_{i} = \frac{p_{i}}{E}
