@@ -1,7 +1,6 @@
 \documentclass{article}
 
 \title{Modern Physics Note Week 1-3}
-\author{Michael Nipper}
 \usepackage{amsmath,amsfonts,amssymb,amsthm}
 \usepackage{braket}
 \usepackage{tikz}
@@ -134,10 +133,6 @@ In the previous example, the time we were analyzing was the coordinate time, a t
 
 There is a third form of time that is measured when an inertial clock is present at both events. The \textbf{space time interval is the time between two measured by an inertial clock that is present at both events. It is unique}. On a STD, the STI is the time measured by a clock who's worldline is a straight line connect two events.
 
-\begin{center}
-  \textbf{insert light clock diagram here}
-\end{center}
-
 The metric equation allows us to calculate the STI from a coordinate time and the distance measured in the frame of the coordinate time:
 \begin{align}
   \Delta s^{2} = \Delta t^{2} - \Delta d^{2}
@@ -187,6 +182,8 @@ And thus we have an equation that relates a coordinate time to a proper time, as
 \begin{align}
   \Delta t = \gamma \Delta \tau
 \end{align}
+
+In general \(\Delta t < \Delta s < \Delta\tau\)
 
 \subsection{Binomial Approximation}
 When the velocities we are considering are very small compared to the speed of light it might be difficult to compute $\gamma$. We can get around this by using the binomial approximation:
@@ -298,42 +295,70 @@ an equation relating $v$ and $v'$. Taking $\frac{x'}{t'}$ and simplifying:
   &\text{or}\\
   v = &\frac{\beta + v'}{1 + v' \beta}
 \end{align}
+These are known as the Einstein velocity addition eqauations.
 \section{Relitivistic Dynamics}
 
 \subsection{The Four-Vector}
 We need a definition of momentum that is consistant with SR. Enter the Four-Vector representation of momentum, typically denoted as $p^{\mu}$.
+\begin{align*}
+  &p^{\mu}= \begin{bmatrix} E \\ \vec{p} \end{bmatrix}\\
+  \\
+  &p^{\mu}= \begin{bmatrix} E \\ \vec{p}_{x} \\ \vec{p} _{y}\\ \vec{p}_{z} \end{bmatrix}\\
+\end{align*}
+Four-Vectors use tensor notation, where the upper greek letter indicates an indicie, not an exponent. In this case, $\mu$ ranges from
+$\{0, 1, 2, 3\}$. The zeroeth comonect is the time component, in this case its relativistic energy. An objects relativistic energy is
+defined as $\gamma m_{0}$, where $m_{0}$ is the rest mass of the object, the mass as measured in a reference frame where it is at rest.
+The 1st through 3rd components are the space components, here the relativistic momentum $\gamma m_{0} v$. It is for this reason that
+the energy of an object is sometimes refered to as its relativistic mass $m_{rel}$, meaning $p = m_{rel}v$, an intiutive analog of
+newtonian momentum. This has fallen out of fashion.
+
+Pluging in the definitions of energy and momentum into our 4-momentum we get the following. Note that for one dimensional problems the
+$y$ and $z$ components can be dropped.
 \begin{align}
-  &p^{\mu} = \begin{bmatrix} \gamma m \\ \gamma m \vec{v} \end{bmatrix}
-  = \begin{bmatrix} E \\ \vec{p} \end{bmatrix}\\
+  &p^{\mu}= \begin{bmatrix} \gamma m_{0} \\ \gamma m_{0} \vec{v} \end{bmatrix}
 \end{align}
-For an object of mass m. For light with no mass
-\begin{align}
-  p^{\mu}_{\gamma} = \begin{bmatrix} E \\ E \end{bmatrix}
-\end{align}
-These vectors really have four components, one momentum component for each direction
-and one energy component. But for a one-dimensonal problem we can drop the botton two
-components and treat it as a two-dimensonal vector.
 
 4-Momentum is consereved just like newtonian momentum. Once the final momentum of an
 object is determined after a collision, we can extract information about the object
 from its 4-momentum. First, to get mass:
 \begin{align*}
-  E^{2} - |p|^{2} &= \gamma^{2} m^{2} - \gamma^{2} m^{2} |v|^{2}\\ \\
-  E^{2} - |p|&^{2} = \gamma^{2}m^{2} (1 - |v|^{2})\\
+  E^{2} - |p|^{2} &= \gamma^{2} m_{0}^{2} - \gamma^{2} m_{0}^{2} |v|^{2}\\ \\
+  E^{2} - |p|&^{2} = \gamma^{2}m_{0}^{2} (1 - |v|^{2})\\
 \end{align*}
 Recall the deffinition of $\gamma$:
 \begin{align*}
   \gamma^{2} = &\frac{1}{1-|v|^{2}}\\ \\
-  E^{2} - &|p|^{2} = m^{2}
+  E^{2} - &|p|^{2} = m_{0}^{2}
 \end{align*}
 Therefore:
 \begin{align}
-  m = \sqrt{E^{2} - p^{2}}
+  m_{0} = \sqrt{E^{2} - p^{2}}
 \end{align}
-As the velocity of the object increaes its momentum increases but its energy does not. So as velocity increases, the radicand decreases
 Notice that we can divide the momentum by energy to get our velocity:
 \begin{align}
   &v_{i} = \frac{p_{i}}{E}
 \end{align}
+If we consider light, which has no rest mass, using eq(20) we see that $E_{\gamma}=p_{\gamma}$. Therefore, the 4-momentum of light is:
+\begin{align}
+  p^{\mu}_{\gamma} = \begin{bmatrix} E \\ E \end{bmatrix}
+\end{align}
+
+Does mass increase as you travel closer to the speed of light? The answer depends on how you define mass. If you
+define mass as the amount of stuff in an object, then no. However, if you define it as an objects resistance to
+changes in its motion, ie as inertia, then yes, though this is it seen as out of fashion to refer to mass this way
+in this context. Cleary, Newton's second law as \(\vec{F}=m\vec{a}\) does not work in the context of relativity.
+However, the form \(\vec{F}=\dot{\vec{p}}\) does hold when \(\vec{p}=p_{i}\), the relativistic momentum. When we
+take the derivative we get:
+\[
+  \vec{F}= \gamma m_{0}\dot{\vec{v}}+\dot{\gamma}m_{0}\vec{v}
+\]
+Where \(m_{0}\) is the rest mass. To find \(\dot{\gamma}\):
+\[
+  \frac{d\gamma}{dt}=\frac{d\gamma}{dv}\frac{dv}{dt}
+\]
+Where \(v\) is the speed, not velocity:
+\[
+  \dot{v}=\frac{d}{dt}\sqrt{\vec{v}\cdot\vec{v}}=\frac{\vec{v}\cdot\vec{a}}{v}
+\]
 
 \end{document}
