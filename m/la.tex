@@ -1,0 +1,256 @@
+%basic math latex doc
+\documentclass{article}
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+\usepackage[margin=1.0in]{geometry}
+\usepackage[parfill]{parskip}
+\begin{document}
+\section{Chapter 1: Linear Systems}
+
+Consider a system of equations
+\begin{align*}
+  ax + by = m\\
+  cx + dy = n
+\end{align*}
+Expressed in slope intercept form
+\begin{align*}
+  x &= -\frac{a}{b}x + \frac{m}{b}\\ \\
+  x &= -\frac{c}{d}x + \frac{n}{d}\\
+\end{align*}
+A system of two linear equations has a unique solution if slopes are different
+\begin{align*}
+  \frac{a}{b} \neq \frac{m}{b} \rightarrow ad - bc \neq 0
+\end{align*}
+The system has no solutions if slopes are equal $(ad - bc = 0$) but the $y$ intecepts are different:
+\begin{align*}
+  \frac{m}{b} \neq \frac{n}{d} \rightarrow dm - bn \neq 0
+\end{align*}
+The system has infine solutions if slopes are equal $(ad - bc = 0)$ and $y$ intercepts are equal $(dm - bn = 0)$. Graphically,
+the lines meet at a point (one solution), are parallel (no solution), or are the same line (inf solutions). For a system of
+three equations it is three planes all intersecting at a point, many points, or no points.
+
+An matrix has one and only one row echelon form
+
+It takes on average $\frac{n^3}{3}$ to solve an n dimensional system using gaussian elementation
+
+\section{Chapter 2: Matrices}
+
+\subsection{Multiplication}
+
+A system of linear equations
+\begin{align*}
+   ax + by = m \\
+   cx + dy =n
+\end{align*}
+Can be encoded as a matrix
+\begin{align*}
+  \begin{bmatrix} a & b \\ c & d \end{bmatrix}
+    \begin{bmatrix} x \\ y \end{bmatrix} = \begin{bmatrix} m \\ n \end{bmatrix}
+\end{align*}
+Or \(\bold{A} \vec{x}= \vec{b}\).
+
+The rules for matrix multiplication are as follows: for two matrices of size \(m,k\) and \(p,n\), \(\bold{A}_{m \times k}\) and
+\(\bold{B}_{p \times n}\), the product \(\bold{AB}\) exists if and only if \(k = p\), and it's product has size \(m,n\). Each component can be found by taking the dot product of the corrisponding row in \(A\) and column in \(B\), \(\bold{AB}_{i,j}=
+\vec{a}_{i}\cdot \vec{b}_{j}\). \begin{bf}Note\end{bf} that matrix multiplication is not communitave in general, \(\bold{AB} \neq \bold{BA}\).
+
+If \(\bold{A}\) is a square matrix then we can define \(\bold{A}^{n}= \bold{AAAAA}...\) n times. Exponents add and multiply as
+they do with real numbers. \(\bold{A}^{0}\) is defined to be the identity matrix, \(\bold{I}\), the matrix with ones on the main
+diagnal and zeroes everywhere else. \(\bold{IA}=\bold{AI}=\bold{A}\) always.
+\begin{align*}
+  \bold{I}_{2} = \begin{bmatrix} 1 & 0 \\ 0 & 1\end{bmatrix}
+\end{align*}
+\(\bold{B}\) is said to be the inverse of \(\bold{A}\) if that \(\bold{AB} = \bold{BA} = \bold{I}\), denoted \(\bold{A}^{-1}\).
+\begin{bf}Note\end{bf} not all matrices have an inverse. In order for a matrix to have an inverse it must at least be square.
+There are several test to see if a matrix has an inverse. If no inverse exists a it is said to be non-invertable or singular.
+
+tired of slashbold
+
+Matrix multiplication is distributive, \(A(B + C) = AB + BC\).
+
+\begin{it}Theorem:\end{it}
+
+(a) A matrix can have at most one inverse
+
+(b) if \(A\) and \(B\) are invertible matrices of the same size then
+\[
+  (AB)^{-1}= B^{-1}A^{-1}
+\]
+
+(c) if \(A_{1}A_{2}\ldots A_{n}\) are invertible matrices of the same size then their product is invertible and
+\[
+  (A_{1}A_{2}...A_{n})^{-1} = {A_{n}}^{-1}\ldots {A_{2}}^{-1}{A_{1}}^{-1}
+\]
+Some facts: if a matrix has a row or a column of entirely 0s it cannot be invertible. If \(A\) is invertible then \(AB = AC
+\rightarrow B=C\).
+
+\subsection{Row Reduction and Elementary Matries}
+
+Just as we can incode a linear system as a matrix, we can encode elementary row operations on a linear
+system as matrix multiplication. Matrices that preform elementary operations are called elementary matrices.
+
+\begin{it}Theorem:\end{it}
+
+Let \(A\) be a \(m \times n\) matrix. We can perform any elementary row operation on \(A\) by first
+performing  that same operation on the identity matrix \(I_{m}\) to get a matrix \(E\) the forming the
+product \(EA\).
+
+To perform a row swap, swap the two rows in \(I\), for example to swap row two and three in a rank three matrix:
+\[
+  E = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 0 & 1 \\ 0 & 1 & 0 \end{bmatrix}
+\]
+To multiply a row by a scaler, replace the one in the corrisponding row in \(I\) with that number. To
+multiply the second row in a rank three matrix by \(-2\):
+\[
+  E = \begin{bmatrix} 1 & 0 & 0 \\ 0 & -2 & 0 \\ 0 & 0 & 0 \end{bmatrix}
+\]
+To add one row to another, add a one in the spot corrisponding to the column of the row to be added from and
+the row to be added to. In other words, to add row \(i\) to row \(j\) set \(e_{ij}=1\). So to add row one
+to row three in a rank three matrix:
+\[
+  E = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 1 & 0 & 1 \end{bmatrix}
+\]
+Therefore, we can obtain a row reduced matrix \(R\) from of a matrix \(A\) by repeatedly left multiplying
+\(A\) by elementary matrices.
+\[
+  R = E_{k}E_{k-1}E_{k-2}\ldots E_{1}A
+\]
+All elementary matrices are invertable.
+
+\begin{it}Theorem:\end{it}
+
+A square matrix \(A\) is invertable if and only if its reduced row echelon form \(R\) is the identity matrix
+\(I\):
+\[
+  R = I = E_{k}E_{k-1}E_{k-2}\ldots E_{1}A
+\]
+And thus:
+\[
+  E_{k}E_{k-1}E_{k-2}\ldots E_{1} = A^{-1}
+\]
+Now that we have a method for finding the inverse of a matrix we can use it to solve the equation
+\(A\vec{x}=\vec{b}\), namely \(\vec{x}=A^{-1}\vec{b}\). Computationally, Gaussian elemination is still more
+efficient, so use that in an actual algorithm. The existance and uniqueness of a solution to the system
+directly corrisponds to the invertability of the matrix \(A\). Of course, if \(A^{-1}\) exists, then the
+system has a unique solution. How do we differentiate between no solutions and many solutions?
+
+If a matrix is square, or has more columns than rows, all three scenarios are possible. However, if it has
+more rows than columns, then it is impossible for the system to have a unique solution, and must have no
+solution or many.
+
+There is a special system, called a homogenous system, where all constant terms are zero,
+\(A\vec{x}=\vec{0}\). This system always has one solution \(\vec{x}=\vec{0}\), called the trivial solution.
+
+For a square matrix:
+\begin{center}
+  \begin{tabular}{c c c}
+    \(m=n\) & Homogenous & Inhomogenous \\
+    Singular & \(\infty\) & \(\infty\) or none \\
+    Invertable & unique sol & \(\vec{x}=0\) is the only solution
+  \end{tabular}
+\end{center}
+
+\section{Chapter 3: Determinants}
+\subsection{Definition}
+
+Consider an arbitrary 2x2 matrix A:
+\[A=\begin{bmatrix}a & b \\ c & d\end{bmatrix}\]
+And assume \(a\neq0\). We can multiply by elementary matricies to get
+\[\begin{bmatrix}1 & \frac{b}{a} \\ 0 & \frac{ad-bc}{a}\end{bmatrix}\]
+If \(ad-bc=0\) then we have a reduced row echelon form that is not \(I\). Therfore \(A\) is not invertable.
+If \(ad-bc\neq0\) then we can mulitply the second row by \(\frac{a}{ad-bc}\) and continue reducing to get
+\(I\). If \(a=0\) and \(ad-bc=0\) then either \(b\) or \(d\) must be zero, and \(A\) would have either
+a row or column of entierly zeroes and would be singular. If \(a=0\) and \(ad-bc\neq0\) then we can swap
+the rows and have the same form as above. Therefore, for any 2x2 matrix we have:
+\[ab-bc\neq0\leftrightarrow A^{-1}\text{ exists}\]
+The expression \(ad-bc\) is called the determinant of \(A\), or \(|A|\). For a 3x3 matrix we can follow the
+same process (though it gets a bit harier) and get the following expression for the determinant:
+\[|A_{3x3}|=a(ei-fh)-b(di-fg)+c(dh-eg)\]
+Notice the alternating sign. This equation can be rewritten as
+\[|A|=a\begin{vmatrix}e&f\\h&i\end{vmatrix}-b\begin{vmatrix}d&f\\g&i\end{vmatrix}+c\begin{vmatrix}d&e\\g&h\end{vmatrix}\]
+For our coeffiencents \(a,b,c\) we can mark through the row and column that the coeffiencent appears in
+to find the submatrix who's determinant corisponds with that coeffiencent. For \(a\):
+\[\begin{bmatrix} \mathbf{a} & \mathbf{b} & \mathbf{c}\\ \mathbf{d} & e & f \\ \mathbf{g} & h & i\end{bmatrix}\]
+And so on, alternating signs. Thus we can recursivly define the determinate of larger matrices by
+deleting one row and column at a time and and taking the determinate of the smaller matrix formed:
+\[|A|=\begin{vmatrix}a_{1,1}&\cdots&a_{1,m}\\ \vdots &&\vdots \\ a_{m,1} &\cdots&a_{m,m}\end{vmatrix}\]
+\[=a_{1,1}|M_{1,1}|-a_{1,2}|M_{1,2}|+a_{1,3}|M_{1,3}|-\cdots(-1)^{1+m}a_{1,m}|M_{1,m}|\]
+Where \(M_{i,j}\) is the matrix when the \(i\)th row and \(j\)th column are deleted, and its determant is
+called the (\(i,j\))th minor of \(A\).
+
+\begin{it}Theorem:\end{it}
+
+Let \(\delta_{n}(k)=(-1)^{n+k}\). We can find the determant of a square \(m \times m\) matrix \(A\) by
+either
+\[|A|=\delta_{1}(i)a_{i,1}|M_{i,1}|+\delta_{2}(i)a_{i,2}|M_{i,2}|+\delta_{3}(i)a_{i,3}|M_{i,3}|+\cdots\delta_{m}(i)a_{i,m}|M_{i,m}|=\sum_{n=1}^{m}\delta_{n}(i)a_{i,n}|M_{i,n}|\]
+\begin{center}or\end{center}
+\[|A|=\delta_{1}(j)a_{1,j}|M_{1,j}|+\delta_{2}(j)a_{2,j}|M_{2,j}|+\delta_{3}(j)a_{3,j}|M_{3,j}|+\cdots\delta_{m}(j)a_{m,j}|M_{m,j}|=\sum_{n=1}^{m}\delta_{n}(j)a_{n,j}|M_{n,j}|\]
+ie, we can pick any one row or column to us as our coeffiencents, and find the minors for thoes coeffiecent
+just as before. This is most usefull when one row or column is mostly zeroes. This is called expanson of
+minors.
+
+\begin{it}Lemma:\end{it} if \(A\) has a row or column of all zeroes then \(|A|=0\). Perform an
+expansion by minors on that row or column and all coefficients will be zero, thus the sum will be zero.
+
+\begin{it}Lemma:\end{it} A matrix who's entries below the main diagonal are zero is called an upper triangular matrix. The determant of an upper triangluar matrix \(T\) of size \(m\times m\) is:
+\[|T|=\prod_{n=1}^{m}t_{n,n}=t_{1,1}t_{2,2}t_{3,3}\cdots t_{m,m}\]
+Since \(T\) is upper triangluar, we choose to expand along the first column. All entries below \(t_{1,1}\)
+are zero by deffinition of upper triangluar, so all terms cancel execpt for \(t_{1,1}|M_{1,1}|\). But
+\(M_{1,1}\) is also upper-triangular, and the only term that we will get after expanding that matrix is
+\(t_{2,2}|M'_{2,2}|\). Each subsequient minor will give us the next entry on the diagognal until we get to
+the bottom \(2\times2\) matrix, which will just give us \(t_{m,m}\).
+
+\begin{it}Sublemma:\end{it} If \(R\) is a matrix in reduced row echelon form then:
+\begin{enumerate}
+        \item if \(R\) is an identity matrix \(|R|=1\)
+        \item if \(R\) is not an identity matrix \(|R|=0\)
+\end{enumerate}
+The main diagonal of \(I\) is all 1s so \(|I|=1\) by the previous lemma. If \(R\neq I\) then there must be
+at least one zero in its main diagnoal, and thus \(|R|=0\) by the previous lemma.
+
+\subsection{Properties}
+
+\begin{enumerate}
+  \item If \(B\) is a matrix obtained by multiplying any row of \(A\) by a real number \(r\)
+        \[|B|=r\|A|\]
+  \item If two rows of \(A\) are interchanged \[|B|=-|A|\]
+  \item If a multiple of one row is added to another \[|B|=|A|\]
+\end{enumerate}
+This can be shown using elementary matrices.
+
+\begin{it}Theorem:\end{it}
+
+\(|AB|=|A||B|\)
+
+%TODO prove above
+%
+Since \(|A|\) and \(|B|\) are real numbers, this implies that \(|A||B|=|B|A|\) even though in general \(AB\neq BA\). Furthermore, if \(|A|\neq0\) then
+\begin{align*}
+  AA^{-1}&=I\\
+  |A||A^{-1}|&=|I|=1\\
+  |A^{-1}|&=\frac{1}{|A|}
+\end{align*}
+
+Let \(A\) be \(m\times n\). We define the transpose of \(A\), \(A^{T}\) as the matrix formed by swapping the \(i\)th row of \(A\) with the \(j\)th
+column. So \(A^{T}\) will have have the sime \(n\times m\). Example
+\[A=\begin{bmatrix}1&2\\3&4\end{bmatrix}\rightarrow A^{T}=\begin{bmatrix}1&3\\2&4\end{bmatrix}\]
+Properties of transpose:
+\begin{enumerate}
+        \item \((A^{T})^{T}=A\)
+        \item \((A+B)^{T}=A^{T}+B^{T}\)
+        \item \((rA)^{T}=rA^{T}\)
+        \item \(AB)^{T}=B^{T}A^{T}\)
+  \item \({|A|}^{T}=|A|\) if \(A\) is square
+\end{enumerate}
+
+Earlier it was shown that
+\[|A|=\sum_{n=1}^{m}\delta_{n}(j)a_{n,j}|M_{n,j}=\sum_{n=1}^{m}\delta_{n}(i)a_{i,n}|M_{i,n}|\]
+If we let \(C_{i,j}=\delta_{i}(j)|M_{i,j}|\), then we have
+\[|A|=\sum_{n=1}^{m}a_{i,n}C_{i,n}=\sum_{n=1}^{m}a_{n,j}C_{n,j}\]
+\(C_{i,j}\) is called the (\(i,j\))th cofactor of \(A\).
+% TODO finish cofactor and cramers rules
+
+\section{Euclidean Spaces}
+We define the set of all \(n\)-tuples containing real numbers as \(R^{n}\), the n-dimensional euclidean space. For example, \(R^{2}\) is the set
+of all pairs of real numbers \((x_{1},x_{2})| x_{n}\in R\)
+
+
+\end{document}
